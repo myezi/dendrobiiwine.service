@@ -97,16 +97,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Base\BusinessBase.cs" />
     <Compile Include="Base\EnableCorsAttribute.cs" />
     <Compile Include="Base\EziAuthorizationAttribute.cs" />
     <Compile Include="Base\EziWebApiExceptionAttribute.cs" />
     <Compile Include="Base\ModuleAttibute.cs" />
+    <Compile Include="Business\GenerateCardBusiness.cs" />
     <Compile Include="Business\UserManager.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Data\MySQLDataConnection.cs" />
     <Compile Include="Data\SQLDataConnection.cs" />
     <Compile Include="Data\UserData.cs" />
+    <Compile Include="Data\VipCardData.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
