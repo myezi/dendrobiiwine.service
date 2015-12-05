@@ -1,0 +1,31 @@
+SampleApplication
+	一个完全基于IIS WebHost 和 MS WebApi 2.2 体系的纯WebApi实现
+
+引用说明
+	Dapper - 轻量级ORM技术
+	log4net - Logging技术
+	Microsoft.AspNet.WebApi
+	Microsoft.AspNet.WebApi.Client
+	Microsoft.AspNet.WebApi.Core - WebApi 2.2核心组件
+	Microsoft.AspNet.WebApi.WebHost - WebApi基于IIS的实现组件
+	MySql.Data - MySQL ADO.NET连接组件
+	Newtonsoft.Json - Json组件,WebApi必须组件
+
+目录说明
+	App_Start: MVC标准配置目录,必须.
+	Base:  核心WebApi相关功能类,保留
+	Controllers: 所有的WebApi Controller类,保留
+	Data: 数据连接和数据对象,保留
+	Models: View Models实现目录,可以移动改名
+	Util: 通用功能目录,可以移动改名
+
+文件说明
+	Global.asax: MVC全局控制类,必须
+	packages.config: Nuget配置列表,必须
+	Web.confg: ASP.NET经典配置文件,必须
+	default.html: 默认首页,无特殊意义
+
+	WebApiConfig.cs : 基于IIS的WebApi配置入口,必须
+	Encryption.cs : AES加密算法实现.
+	SQLDataConnection.cs : SQL Server连接入口类
+	MySQLDataConnection.cs : My SQL连接入口类

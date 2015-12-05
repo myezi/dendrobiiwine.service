@@ -1,0 +1,33 @@
+构架说明
+
+前端: 
+    主选:  纯HTML5/CSS3 + JQuery 和相关技术
+	备选: HTML/CSS + AngularJs
+	开发: 纯HTML + JS开发
+	部署: Nodejs + NPM 相关部署工具
+
+中间层
+	主选: MS WebApi for IIS (Framework 4.5 +) - 基于空的MVC5框架
+	备选: 基于Owin实现的MS WebApi - 可扩充至Linux平台
+	开发: 利用组合模式封装数据对象DO为View Model在WebApi中使用.
+			通过简单Manager类,实现ViewModel的DO的相互转换,并和数据层进行交互.实现数据持久化.
+
+数据层
+	主选: 轻量级ORM Dapper + ADO.NET
+	备选: Entity Framework 6
+	开发: 实现数据对象DO用于数据交互,并提供给中间层使用.
+
+数据库
+	主选: MariaDB - 可安装到Linux或其他操作系统
+	         https://mariadb.org/
+	备选: SQL Server 2012
+
+企业级方案
+认证: 给予MS Identity模式的认证模式.
+安全: AES加密Token访问机制
+性能: 数据层使用轻量级技术保证数据访问性能,前端异步WebApi构架保证访问性能.
+缓存: 建议在中间层做一级内存缓存,缓存数据同步通过定时任务完成: 
+      或者通过Trigger在数据库层面进行同步,完成读写分离.
+跟踪: Log4Net技术
+稳定: IIS Host保证稳定性.
+
