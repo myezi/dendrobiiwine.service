@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Data.Common;
+using Dapper;
 
 namespace SampleApplication.Data
 {

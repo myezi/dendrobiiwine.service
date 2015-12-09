@@ -3,6 +3,7 @@ using SampleApplication.Business;
 using SampleApplication.Models;
 using System.Threading.Tasks;
 using System.Web.Http;
+using SampleApplication.Data;
 
 namespace SampleApplication.Controllers
 {
@@ -10,34 +11,31 @@ namespace SampleApplication.Controllers
     public class UserController : ApiController
     {
         [HttpGet]
-        public async Task<UserModel[]> GetUsersAsync()
-        {
-            var users = await UserManager.GetUsersAsync();
-            return users;
-        }
-
-        [EnableCors]
         [AllowAnonymous]
-        [HttpGet]
-        public UserModel[] GetUsers()
+        public async Task<UserModel[]> GetUsers()
         {
-            var users = UserManager.GetUsers();
-            return users;
-        }
-
-        private static UserModel[] _users;
-        [HttpGet]
-        public UserModel[] GetUsersCache()
-        {
-            if(_users == null)
-                _users = UserManager.GetUsers();
-            return _users;
+            return await UserBusiness.GetInstance().GetUsersAsync();
         }
 
         [HttpPost]
-        public bool SaveUser(UserModel user)
+        public bool Save(UserModel user)
         {
-            return true;
+            var aUser = new UserData
+            {
+                UserID = user.Id,
+                Name = user.Name,
+                Login = user.Login,
+                Password = user.Password,
+                Email = user.Email,
+                QQ = user.QQ,
+                Mobile = user.Mobile,
+                Role = user.Role,
+                Status = user.Role
+            };
+
+            return aUser.UserID == 0
+                ? UserBusiness.GetInstance().Create(aUser)
+                : UserBusiness.GetInstance().Edit(aUser);
         }
     }
 }

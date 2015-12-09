@@ -51,23 +51,17 @@ namespace SampleApplication.Business
 
         private List<VipCardData> GetExistsCardNo()
         {
-            using (var conn = MySQLDataConnection.OpenConnection())
-            {
-                const string query = "select * from VIPCard";
-                var result = conn.Query<VipCardData>(query);
-                return result.ToList();
-            }
+            string query = "select * from VIPCard";
+            var result = MySQLDataHelp.GetData<VipCardData>(query);
+            return result.Result.ToList();
         }
 
         private void AddCardNo(VipCardData aCard)
         {
-            using (var conn = MySQLDataConnection.OpenConnection())
-            {
-                string query = string.Format(@"insert into vipcard
+            string query = string.Format(@"insert into vipcard
                                 (VIPNumber, VIPKey, IsAssigned)
                                 value(@VIPNumber, @VIPKey, @IsAssigned)");
-                conn.Execute(query, aCard);
-            }
+            MySQLDataHelp.ExecuteSave(query, aCard);
         }
     }
 }

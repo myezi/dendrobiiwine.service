@@ -20,19 +20,22 @@ namespace SampleApplication.Models
             return _data;
         }
 
-        public string Id
-        {
-            get { return _data.USERID; }
-        }
+        public int Id => _data.UserID;
 
-        public string Name
-        {
-            get { return _data.NAME; }
-        }
+        public string Name => _data.Name;
 
-        public string Login
-        {
-            get { return _data.LOGIN; }
-        }
+        public string Login => _data.Login;
+
+        public string Password => _data.Password;
+       
+        public string Email => _data.Email;
+
+        public string QQ => _data.QQ;
+
+        public string Mobile => _data.Mobile;
+
+        public string Role => _data.Role;
+
+        public string Status => _data.Status;
     }
 }
