@@ -161,6 +161,7 @@
     <Compile Include="Base\ConfigSetting.cs" />
     <Compile Include="Base\Const.cs" />
     <Compile Include="Base\EnableCorsAttribute.cs" />
+    <Compile Include="Base\EnumConst.cs" />
     <Compile Include="Base\EziAuthorizationAttribute.cs" />
     <Compile Include="Base\EziWebApiExceptionAttribute.cs" />
     <Compile Include="Base\ModuleAttibute.cs" />

@@ -22,14 +22,14 @@ namespace SampleApplication.Controllers
         [AllowAnonymous]
         public async Task<ProviderTypeModel[]> GetProviderTypes()
         {
-            //return CommonBusiness.GetInstance().GetProviderType();
-            return null;
+            return await CommonBusiness.GetInstance().GetProviderType(EnumConst.Status.Active.ToString());
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public void GetServiceTypes()
+        public async Task<ServiceTypeModel[]> GetServiceTypes()
         {
+            return await CommonBusiness.GetInstance().GetServiceType(EnumConst.Status.Active.ToString());
         }
     }
 }
