@@ -30,7 +30,14 @@ namespace SampleApplication.Business
         {
             string query = string.Format(@"select * from customer where Mobile = '{0}'", mobileNo);
             var result = MySQLDataHelp.GetData<CustomerData>(query);
-            return result.Result.Select(d => new CustomerModel(d)).First();
+            if (result.Result.Count > 0)
+            {
+                return result.Result.Select(d => new CustomerModel(d)).First();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public bool Create(CustomerData aCustomerData)

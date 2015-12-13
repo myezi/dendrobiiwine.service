@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Mvc;
+using System.Web.Http;
 using SampleApplication.Base;
 using SampleApplication.Business;
 using SampleApplication.Data;
@@ -13,8 +13,8 @@ using SampleApplication.Util;
 
 namespace SampleApplication.Controllers
 {
-    [Module(AllowModules = Module.Vehicle | Module.Booking)]
-    public class CustomerController : Controller
+    //[Module(AllowModules = Module.Vehicle | Module.Booking)]
+    public class CustomerController : APIControllerBase
     {
         [HttpGet]
         [AllowAnonymous]
