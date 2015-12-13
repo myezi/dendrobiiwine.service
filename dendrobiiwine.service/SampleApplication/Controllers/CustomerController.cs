@@ -18,11 +18,11 @@ namespace SampleApplication.Controllers
     {
         [HttpGet]
         [AllowAnonymous]
-        public APIActionResult.GeneralResult SendSMSCode(string mobileNo)
+        public APIActionResult.GeneralResult SendSMSCode(string mobile)
         {
             APIActionResult.GeneralResult result = null;
 
-            var customer = CustomerBusiness.GetInstance().GetCustomerByMobileNo(mobileNo);
+            var customer = CustomerBusiness.GetInstance().GetCustomerByMobileNo(mobile);
             if (customer == null)
             {
                 result = new APIActionResult.GeneralResult {Success = false, Message = "手机号无法匹配到客户"};
