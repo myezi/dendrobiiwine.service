@@ -21,7 +21,7 @@ namespace SampleApplication.Controllers
         public APIActionResult.GeneralResult SendSMSCode(string mobile)
         {
             APIActionResult.GeneralResult result;
-
+            
             var customer = CustomerBusiness.GetInstance().GetCustomerByMobileNo(mobile);
             if (customer == null)
             {
@@ -46,60 +46,62 @@ namespace SampleApplication.Controllers
             return result;
         }
 
-        [HttpPost]
+        [HttpGet]
         [AllowAnonymous]
-        public APIActionResult.LoginResult LoginBySMSCode(LoginModel login)
+        public APIActionResult.LoginResult LoginBySMSCode(string mobile, string verifyCode)
         {
             APIActionResult.LoginResult result;
 
-            if (login != null)
+            //check moblie number format
+            if (!CheckMobile(mobile))
             {
-                //check moblie number format
-                if (!Regex.IsMatch(login.MobileNumber, "/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/"))
-                {
-                    result = new APIActionResult.LoginResult { Success = false, Message = "手机号码错误" };
-                }
-                else if (string.IsNullOrEmpty(login.VerifyCode))
-                {
-                    result = new APIActionResult.LoginResult { Success = false, Message = "验证码错误" };
-                }
-                else
-                {
-                    var customer = CustomerBusiness.GetInstance().GetCustomerByMobileNo(login.MobileNumber);
-                    if (customer == null)
-                    {
-                        result = new APIActionResult.LoginResult { Success = false, Message = "手机号无法匹配到客户" };
-                    }
-                    else
-                    {
-                        if (!customer.VerifyCode.Equals(login.VerifyCode) ||
-                            (customer.GeneratedVerifyCodeTime.HasValue && 
-                            customer.GeneratedVerifyCodeTime.Value.AddMinutes(TypeFormat.GetInt(ConfigSetting.VerifyCodeValidTime)) > DateTime.Now))
-                        {
-                            result = new APIActionResult.LoginResult { Success = false, Message = "验证码错误" };
-                        }
-                        else
-                        {
-                            result = new APIActionResult.LoginResult
-                            {
-                                Success = true,
-                                Message = "登录成功",
-                                Content =
-                                    new APIActionResult.LoginInfo
-                                    {
-                                        CustomerID = Encryption.Encrypt(customer.Id.ToString()),
-                                        CustomerName = customer.Name
-                                    }
-                            };
-                        }
-                    }
-                }
+                result = new APIActionResult.LoginResult { Success = false, Message = "手机号码错误" };
+            }
+            else if (string.IsNullOrEmpty(verifyCode))
+            {
+                result = new APIActionResult.LoginResult { Success = false, Message = "验证码错误" };
             }
             else
             {
-                result = new APIActionResult.LoginResult { Success = false, Message = "请正确输入手机号码和验证码" };
+                var customer = CustomerBusiness.GetInstance().GetCustomerByMobileNo(mobile);
+                if (customer == null)
+                {
+                    result = new APIActionResult.LoginResult { Success = false, Message = "手机号无法匹配到客户" };
+                }
+                else
+                {
+                    if (!customer.VerifyCode.Equals(verifyCode) ||
+                        (customer.GeneratedVerifyCodeTime.HasValue && 
+                        customer.GeneratedVerifyCodeTime.Value.AddMinutes(TypeFormat.GetInt(ConfigSetting.VerifyCodeValidTime)) > DateTime.Now))
+                    {
+                        result = new APIActionResult.LoginResult { Success = false, Message = "验证码错误" };
+                    }
+                    else
+                    {
+                        result = new APIActionResult.LoginResult
+                        {
+                            Success = true,
+                            Message = "登录成功",
+                            Content =
+                                new APIActionResult.LoginInfo
+                                {
+                                    CustomerID = Encryption.Encrypt(customer.Id.ToString()),
+                                    CustomerName = customer.Name
+                                }
+                        };
+                    }
+                }
             }
             return result;
+        }
+
+        private bool CheckMobile(string mobile)
+        {
+            //电信手机号正则:1[3578][01379]\d{8}
+            //联通手机号正则:1[34578][01256]\d{8}
+            //移动手机号正则:134[012345678]\d{7}|1[34578][012356789]\d{8}
+            return Regex.IsMatch(mobile,
+                @"^(1[3578][01379]\d{8}|1[34578][01256]\d{8}|134[012345678]\d{7}|1[34578][012356789]\d{8})$");
         }
 
         [HttpGet]
