@@ -26,6 +26,13 @@ namespace SampleApplication.Business
             return result.Select(d => new CustomerModel(d)).ToArray();
         }
 
+        public CustomerModel GetCustomerByMobileNo(string mobileNo)
+        {
+            string query = string.Format(@"select * from customer where Mobile = '{0}'", mobileNo);
+            var result = MySQLDataHelp.GetData<CustomerData>(query);
+            return result.Result.Select(d => new CustomerModel(d)).First();
+        }
+
         public bool Create(CustomerData aCustomerData)
         {
             string query =

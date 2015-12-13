@@ -38,6 +38,10 @@ namespace SampleApplication.Models
 
         public string Mobile => _data.Mobile;
 
+        public string VerifyCode => _data.VerifyCode;
+
+        public DateTime? GeneratedVerifyCodeTime => _data.GeneratedVerifyCodeTime;
+
         public string MemberCardNo => _data.MemberCardNo;
 
         public int CouponPoint => _data.CouponPoint;

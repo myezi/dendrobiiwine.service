@@ -21,6 +21,26 @@ namespace SampleApplication.Controllers
             return await OrderBusiness.GetInstance().GetOrderAsync();
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public void GetPendingOrdersByCustomerId()
+        {
+            //return await OrderBusiness.GetInstance().GetOrderAsync();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public void GetHistoryOrdersInPeriod()
+        {
+            //return await OrderBusiness.GetInstance().GetOrderAsync();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public void MakeOrder()
+        {
+        }
+
         [HttpPost]
         public bool Save(OrderModel order)
         {

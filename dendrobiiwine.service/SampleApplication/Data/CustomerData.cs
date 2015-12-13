@@ -16,6 +16,8 @@ namespace SampleApplication.Data
         public string District { get; set; }
         public string Address { get; set; }
         public string Mobile { get; set; }
+        public string VerifyCode { get; set; }
+        public DateTime GeneratedVerifyCodeTime { get; set; }
         public string MemberCardNo { get; set; }
         public int CouponPoint { get; set; }
         public string Status { get; set; }

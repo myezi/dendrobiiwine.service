@@ -155,11 +155,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Base\APIReturnResult.cs" />
     <Compile Include="Base\BusinessBase.cs" />
+    <Compile Include="Base\ConfigSetting.cs" />
     <Compile Include="Base\EnableCorsAttribute.cs" />
     <Compile Include="Base\EziAuthorizationAttribute.cs" />
     <Compile Include="Base\EziWebApiExceptionAttribute.cs" />
     <Compile Include="Base\ModuleAttibute.cs" />
+    <Compile Include="Base\TypeFormat.cs" />
     <Compile Include="Business\CustomerBusiness.cs" />
     <Compile Include="Business\GenerateCardBusiness.cs" />
     <Compile Include="Business\OrderBusiness.cs" />
@@ -167,19 +170,24 @@
     <Compile Include="Business\ProviderBusiness.cs" />
     <Compile Include="Business\ServiceBusiness.cs" />
     <Compile Include="Business\UserBusiness.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Data\CityData.cs" />
     <Compile Include="Data\CustomerData.cs" />
+    <Compile Include="Data\DistrictData.cs" />
     <Compile Include="Data\MySQLDataConnection.cs" />
     <Compile Include="Data\MySQLDataHelp.cs" />
     <Compile Include="Data\OrderData.cs" />
     <Compile Include="Data\PaymentData.cs" />
     <Compile Include="Data\ProviderData.cs" />
+    <Compile Include="Data\ProvinceData.cs" />
     <Compile Include="Data\ServiceData.cs" />
     <Compile Include="Data\SQLDataConnection.cs" />
     <Compile Include="Data\UserData.cs" />
@@ -188,6 +196,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\PaymentModel.cs" />
     <Compile Include="Models\ProviderModel.cs" />
@@ -215,9 +224,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Common\" />
     <Folder Include="Views\Customer\" />
     <Folder Include="Views\Order\" />
     <Folder Include="Views\Payment\" />
+    <Folder Include="Views\Pay\" />
     <Folder Include="Views\Provider\" />
     <Folder Include="Views\Service\" />
   </ItemGroup>

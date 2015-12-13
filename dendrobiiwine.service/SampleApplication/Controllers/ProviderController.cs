@@ -16,6 +16,27 @@ namespace SampleApplication.Controllers
     {
         [HttpGet]
         [AllowAnonymous]
+        public void GetByArea()
+        {
+            //return await ProviderBusiness.GetInstance().GetProviderAsync();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public void GetDetailById()
+        {
+            //return await ProviderBusiness.GetInstance().GetProviderAsync();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public void GetServices()
+        {
+            //return await ProviderBusiness.GetInstance().GetProviderAsync();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
         public async Task<ProviderModel[]> GetProvider()
         {
             return await ProviderBusiness.GetInstance().GetProviderAsync();
