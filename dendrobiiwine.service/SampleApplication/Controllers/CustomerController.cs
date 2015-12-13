@@ -33,7 +33,7 @@ namespace SampleApplication.Controllers
                 {
                     result =
                         customer.GeneratedVerifyCodeTime.Value.AddMinutes(
-                            TypeFormat.GetInt(ConfigSetting.VerifyCodeValidTime)) < DateTime.Now
+                            TypeFormat.GetInt(ConfigSetting.VerifyCodeValidTime)) > DateTime.Now
                             ? new APIActionResult.GeneralResult {Success = false, Message = "验证码生成太频繁"}
                             : new APIActionResult.GeneralResult {Success = true, Message = "验证码已生成"};
                 }
@@ -72,7 +72,7 @@ namespace SampleApplication.Controllers
                 {
                     if (!customer.VerifyCode.Equals(verifyCode) ||
                         (customer.GeneratedVerifyCodeTime.HasValue && 
-                        customer.GeneratedVerifyCodeTime.Value.AddMinutes(TypeFormat.GetInt(ConfigSetting.VerifyCodeValidTime)) > DateTime.Now))
+                        customer.GeneratedVerifyCodeTime.Value.AddMinutes(TypeFormat.GetInt(ConfigSetting.VerifyCodeValidTime)) < DateTime.Now))
                     {
                         result = new APIActionResult.LoginResult { Success = false, Message = "验证码错误" };
                     }
