@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using SampleApplication.Base;
+using SampleApplication.Business;
+using SampleApplication.Models;
 
 namespace SampleApplication.Controllers
 {
@@ -17,8 +20,10 @@ namespace SampleApplication.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public void GetProviderTypes()
+        public async Task<ProviderTypeModel[]> GetProviderTypes()
         {
+            //return CommonBusiness.GetInstance().GetProviderType();
+            return null;
         }
 
         [HttpGet]
