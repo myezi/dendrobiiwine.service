@@ -23,7 +23,7 @@ namespace SampleApplication.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public void GetDetailById()
+        public void GetDetailById(string id)
         {
             //return await ProviderBusiness.GetInstance().GetProviderAsync();
         }

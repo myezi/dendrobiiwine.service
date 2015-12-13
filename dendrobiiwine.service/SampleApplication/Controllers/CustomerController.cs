@@ -20,7 +20,7 @@ namespace SampleApplication.Controllers
         [AllowAnonymous]
         public APIActionResult.GeneralResult SendSMSCode(string mobile)
         {
-            APIActionResult.GeneralResult result = null;
+            APIActionResult.GeneralResult result;
 
             var customer = CustomerBusiness.GetInstance().GetCustomerByMobileNo(mobile);
             if (customer == null)
@@ -31,10 +31,11 @@ namespace SampleApplication.Controllers
             {
                 if (customer.GeneratedVerifyCodeTime.HasValue)
                 {
-                    if (customer.GeneratedVerifyCodeTime.Value.AddMinutes(TypeFormat.GetInt(ConfigSetting.VerifyCodeValidTime)) < DateTime.Now)
-                    {
-                        result = new APIActionResult.GeneralResult { Success = false, Message = "验证码生成太频繁" };
-                    }
+                    result =
+                        customer.GeneratedVerifyCodeTime.Value.AddMinutes(
+                            TypeFormat.GetInt(ConfigSetting.VerifyCodeValidTime)) < DateTime.Now
+                            ? new APIActionResult.GeneralResult {Success = false, Message = "验证码生成太频繁"}
+                            : new APIActionResult.GeneralResult {Success = true, Message = "验证码已生成"};
                 }
                 else
                 {
