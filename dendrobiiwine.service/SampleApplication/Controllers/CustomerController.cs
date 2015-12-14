@@ -21,7 +21,7 @@ namespace SampleApplication.Controllers
         public APIActionResult.GeneralResult SendSMSCode(string mobile)
         {
             APIActionResult.GeneralResult result;
-            
+
             var customer = CustomerBusiness.GetInstance().GetCustomerByMobileNo(mobile);
             if (customer == null)
             {
@@ -35,14 +35,36 @@ namespace SampleApplication.Controllers
                         customer.GeneratedVerifyCodeTime.Value.AddMinutes(
                             TypeFormat.GetInt(ConfigSetting.VerifyCodeValidTime)) > DateTime.Now
                             ? new APIActionResult.GeneralResult {Success = false, Message = "验证码生成太频繁"}
-                            : new APIActionResult.GeneralResult {Success = true, Message = "验证码已生成"};
+                            : GenerateVerifyCode(mobile, customer);
                 }
                 else
                 {
-                    //generate verify code 
-                    result = new APIActionResult.GeneralResult { Success = true, Message = "验证码已生成" };
+                    result = GenerateVerifyCode(mobile, customer);
                 }
             }
+            return result;
+        }
+
+        private APIActionResult.GeneralResult GenerateVerifyCode(string mobile, CustomerModel customer)
+        {
+            APIActionResult.GeneralResult result;
+            //generate verify code 
+            var verifyCode = Guid.NewGuid().ToString().Substring(0, 6);
+            var cData = customer.ToData();
+            cData.VerifyCode = verifyCode;
+            cData.GeneratedVerifyCodeTime = DateTime.Now;
+            bool isSuccess = SaveData(cData);
+            if (isSuccess)
+            {
+                SendSMSBusiness.SendMessage(mobile, "9OrrI4", new Dictionary<string, string>
+                {
+                    {"code", verifyCode},
+                    {"number", "SMS Test"}
+                });
+            }
+            result = isSuccess
+                ? new APIActionResult.GeneralResult {Success = true, Message = "验证码已生成"}
+                : new APIActionResult.GeneralResult {Success = false, Message = "验证码生成失败"};
             return result;
         }
 
@@ -125,14 +147,21 @@ namespace SampleApplication.Controllers
                 District = customer.District,
                 Address = customer.Address,
                 Mobile = customer.Mobile,
+                VerifyCode = customer.VerifyCode,
+                GeneratedVerifyCodeTime = TypeFormat.GetDateTime(customer.GeneratedVerifyCodeTime),
                 MemberCardNo = customer.MemberCardNo,
                 CouponPoint = customer.CouponPoint,
                 Status = customer.Status
             };
 
-            return aCustomer.CustomerID == 0
-                ? CustomerBusiness.GetInstance().Create(aCustomer)
-                : CustomerBusiness.GetInstance().Edit(aCustomer);
+            return SaveData(aCustomer);
+        }
+
+        private bool SaveData(CustomerData customer)
+        {
+            return customer.CustomerID == 0
+                ? CustomerBusiness.GetInstance().Create(customer)
+                : CustomerBusiness.GetInstance().Edit(customer);
         }
     }
 }

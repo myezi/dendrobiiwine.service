@@ -54,7 +54,7 @@ namespace SampleApplication.Business
         {
             string query =
                 @"update customer set POSITION=@POSITION, Name=@Name, Company=@Company, Province=@Province, City=@City, District=@District, 
-                    Address=@Address, Mobile=@Mobile, MemberCardNo=@MemberCardNo, CouponPoint=@CouponPoint, Status=@Status where CustomerID=@CustomerID";
+                    Address=@Address, Mobile=@Mobile,VerifyCode=@VerifyCode,GeneratedVerifyCodeTime=@GeneratedVerifyCodeTime, MemberCardNo=@MemberCardNo, CouponPoint=@CouponPoint, Status=@Status where CustomerID=@CustomerID";
             return MySQLDataHelp.ExecuteSave(query, aCustomerData);
         }
     }
