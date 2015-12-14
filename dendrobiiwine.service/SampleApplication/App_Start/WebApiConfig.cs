@@ -21,9 +21,6 @@ namespace SampleApplication
             //加入自己定义的异常机制
             config.Filters.Add(new EziWebApiExceptionAttribute());
 
-            //加入验证机制
-            config.Filters.Add(new EziAuthorizationAttribute());
-
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{action}/{id}",

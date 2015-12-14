@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Linq;
 using SampleApplication.Business;
+using SampleApplication.Base;
 
 namespace SampleApplication.Controllers
 {
-   
+    [EnableCors]
     public class DefaultController : ApiController
     {
         [HttpGet]
@@ -43,6 +44,16 @@ namespace SampleApplication.Controllers
             return GenerateCardBusiness.GetInstance().GenerateCardNo(quantity);
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public object GetAppInfo()
+        {
+            return new
+            {
+                Name = "测试WebApi",
+                CompanyName = "内部测试部门"
+            };
+        }
 
     }
 }

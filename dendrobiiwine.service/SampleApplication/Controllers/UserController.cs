@@ -7,7 +7,6 @@ using SampleApplication.Data;
 
 namespace SampleApplication.Controllers
 {
-    [Module(AllowModules = Module.Vehicle | Module.Booking)]
     public class UserController : ApiController
     {
         [HttpGet]

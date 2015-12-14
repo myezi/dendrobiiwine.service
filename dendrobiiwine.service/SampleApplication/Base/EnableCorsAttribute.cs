@@ -7,6 +7,7 @@ namespace SampleApplication.Base
     {
         const string Origin = "Origin";
         const string AccessControlAllowOrigin = "Access-Control-Allow-Origin";
+        const string AccessControlAllowCredentials = "Access-Control-Allow-Credentials";
 
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
@@ -16,6 +17,8 @@ namespace SampleApplication.Base
                 if (!string.IsNullOrEmpty(originHeader))
                 {
                     actionExecutedContext.Response.Headers.Add(AccessControlAllowOrigin, originHeader);
+                    //在Ajax中加入参数xhrFields : { withCredentials: true} 必须HTTP头
+                    actionExecutedContext.Response.Headers.Add(AccessControlAllowCredentials, "true");
                 }
             }
         }

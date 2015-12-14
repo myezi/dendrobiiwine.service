@@ -11,7 +11,6 @@ using SampleApplication.Models;
 
 namespace SampleApplication.Controllers
 {
-    [Module(AllowModules = Module.Vehicle | Module.Booking)]
     public class ProviderController : Controller
     {
         [HttpGet]
