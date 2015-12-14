@@ -202,9 +202,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomerModel.cs" />
-    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Object\LoginObject.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\PaymentModel.cs" />
+    <Compile Include="Object\PaymentObject.cs" />
     <Compile Include="Models\ProviderModel.cs" />
     <Compile Include="Models\ProviderTypeModel.cs" />
     <Compile Include="Models\ServiceModel.cs" />
