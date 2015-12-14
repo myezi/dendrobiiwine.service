@@ -1,0 +1,26 @@
+﻿[
+  { "Link": "ajax/home.html", "Text": "工作台", "Icon": "home", "Roles": null, "Subs": [ ] },
+  {
+    "Link": null,
+    "Text": "用户管理",
+    "Icon": "group",
+    "Roles": null,
+    "Subs": [
+      { "Link": "ajax/account/users-ko.html", "Text": "用户管理(KnockoutJS)", "Icon": "user", "Roles": "admin", "Subs": [ ] },
+      { "Link": "ajax/account/users-ng.html", "Text": "用户管理(AngularJS)", "Icon": "user", "Roles": "none", "Subs": [ ] },
+      { "Link": "ajax/employee/employees.html", "Text": "员工管理", "Icon": "bookmark", "Roles": "admin,user", "Subs": [ ] }
+    ]
+  },
+  {
+    "Link": null,
+    "Text": "常见功能",
+    "Icon": "cubes",
+    "Roles": null,
+    "Subs": [
+      { "Link": "ajax/general/fileupload.html", "Text": "文件上传", "Icon": "file", "Roles": "admin,user", "Subs": [ ] },
+      { "Link": "ajax/general/forms-ko.html", "Text": "表单功能(KnockoutJS)", "Icon": "table", "Roles": "admin,user", "Subs": [ ] },
+      { "Link": "ajax/general/forms-ng.html", "Text": "表单功能(AngularJS)", "Icon": "table", "Roles": "none", "Subs": [ ] },
+      { "Link": "ajax/general/tree.html", "Text": "树形列表", "Icon": "tree", "Roles": "admin,user", "Subs": [ ] }
+    ]
+  }
+ ]
