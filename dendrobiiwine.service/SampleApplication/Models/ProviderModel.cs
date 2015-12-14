@@ -39,9 +39,9 @@ namespace SampleApplication.Models
 
         public string Phone => _data.Phone;
 
-        public string Login => _data.Login;
+        //public string Login => _data.Login;
 
-        public string Password => _data.Password;
+        //public string Password => _data.Password;
 
         public string BigImage => _data.BigImage;
 
@@ -49,7 +49,7 @@ namespace SampleApplication.Models
 
         public int Score => _data.Score;
 
-        public string Status => _data.Status;
+        //public string Status => _data.Status;
 
     }
 }

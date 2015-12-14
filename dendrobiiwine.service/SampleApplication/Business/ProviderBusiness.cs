@@ -25,6 +25,27 @@ namespace SampleApplication.Business
             return result.Select(d => new ProviderModel(d)).ToArray();
         }
 
+        public async Task<ProviderModel[]> GetProvidersByAreaAsync(string area)
+        {
+            string query = "select * from provider";
+            var result = await MySQLDataHelp.GetData<ProviderData>(query);
+            return result.Select(d => new ProviderModel(d)).ToArray();
+        }
+
+        public async Task<ProviderModel> GetProviderByIDAsync(int id)
+        {
+            string query = string.Format("select  * from provider where ProviderID = {0}", id);
+            var result = await MySQLDataHelp.GetData<ProviderData>(query);
+            return new ProviderModel(result.First());
+        }
+
+        internal async Task<ProviderData> GetProviderDataByID(int id)
+        {
+            string query = string.Format("select  * from provider where ProviderID = {0}", id);
+            var result = await MySQLDataHelp.GetData<ProviderData>(query);
+            return result.First();
+        }
+
         public bool Create(ProviderData aProvider)
         {
             string query =

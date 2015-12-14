@@ -16,23 +16,30 @@ namespace SampleApplication.Controllers
     {
         [HttpGet]
         [AllowAnonymous]
-        public void GetByArea()
+        public async Task<ProviderModel[]> GetProvidersByArea(string area)
         {
-            //return await ProviderBusiness.GetInstance().GetProviderAsync();
+            return await ProviderBusiness.GetInstance().GetProvidersByAreaAsync(area);
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public void GetDetailById(string id)
+        public async Task<ProviderModel> GetProviderDetailById(int id)
         {
-            //return await ProviderBusiness.GetInstance().GetProviderAsync();
+            return await ProviderBusiness.GetInstance().GetProviderByIDAsync(id);
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public void GetServices()
+        public async Task<ServiceModel[]> GetServicesByProviderID(int id)
         {
-            //return await ProviderBusiness.GetInstance().GetProviderAsync();
+            return await ServiceBusiness.GetInstance().GetServicesByProviderIDAsync(id);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ServiceModel> GetServiceDetailByID(int id)
+        {
+            return await ServiceBusiness.GetInstance().GetServiceByIDAsync(id);
         }
 
         [HttpGet]
@@ -56,12 +63,12 @@ namespace SampleApplication.Controllers
                 District = provider.District,
                 Address = provider.Address,
                 Phone = provider.Phone,
-                Login = provider.Login,
-                Password = provider.Password,
+                //Login = provider.Login,
+                //Password = provider.Password,
                 BigImage = provider.BigImage,
                 SmallImage = provider.SmallImage,
                 Score = provider.Score,
-                Status = provider.Status
+                //Status = provider.Status
             };
 
             return aProvider.ProviderID == 0

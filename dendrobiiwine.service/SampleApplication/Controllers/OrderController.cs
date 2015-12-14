@@ -23,42 +23,45 @@ namespace SampleApplication.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public void GetPendingOrdersByCustomerId()
+        public async Task<OrderModel[]> GetPendingOrdersByCustomerId(string id)
         {
-            //return await OrderBusiness.GetInstance().GetOrderAsync();
+            return await OrderBusiness.GetInstance().GetPendingOrdersByCustomerIdAsync(id, string.Empty, string.Empty);
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public void GetHistoryOrdersInPeriod()
+        public async Task<OrderModel[]> GetHistoryOrdersInPeriod(string id, string startDate, string endDate)
         {
-            //return await OrderBusiness.GetInstance().GetOrderAsync();
+            return await OrderBusiness.GetInstance().GetPendingOrdersByCustomerIdAsync(id, startDate, endDate);
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public void MakeOrder()
+        public APIActionResult.GeneralResult MakeOrder(OrderModel order)
         {
-        }
-
-        [HttpPost]
-        public bool Save(OrderModel order)
-        {
-            var aOrder = new OrderData
+            try
             {
-                OrderInfoID = order.Id,
-                CustomerID = order.CustomerID,
-                ProviderID = order.ProviderID,
-                ServiceID = order.ServiceID,
-                SubmitTime = order.SubmitTime,
-                OrderTime = order.OrderTime,
-                OrderStatus = order.Status,
-                Comments = order.Comment
-            };
+                var aOrder = new OrderData
+                {
+                    OrderInfoID = order.Id,
+                    CustomerID = order.CustomerID,
+                    ProviderID = order.ProviderID,
+                    ServiceID = order.ServiceID,
+                    SubmitTime = TypeFormat.GetDateTime(order.SubmitTime),
+                    OrderTime = TypeFormat.GetDateTime(order.OrderTime),
+                    OrderStatus = order.Status,
+                    Comments = order.Comment
+                };
 
-            return aOrder.OrderInfoID == 0
-                ? OrderBusiness.GetInstance().Create(aOrder)
-                : OrderBusiness.GetInstance().Edit(aOrder);
+                bool isSuccess = aOrder.OrderInfoID == 0
+                    ? OrderBusiness.GetInstance().Create(aOrder)
+                    : OrderBusiness.GetInstance().Edit(aOrder);
+                return new APIActionResult.GeneralResult {Success = isSuccess, Message = "保存成功"};
+            }
+            catch (Exception ex)
+            {
+                return new APIActionResult.GeneralResult { Success = false, Message = ex.Message };
+            }
         }
     }
 }

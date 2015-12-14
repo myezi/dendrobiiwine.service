@@ -25,6 +25,21 @@ namespace SampleApplication.Business
             return result.Select(d => new OrderModel(d)).ToArray();
         }
 
+        public async Task<OrderModel[]> GetPendingOrdersByCustomerIdAsync(string id, string startDate, string endDate)
+        {
+            string query = string.Format("select * from orderinfo where CustomerID = {0}", id);
+            if (!string.IsNullOrEmpty(startDate))
+            {
+                query += string.Format(" and OrderTime >= '{0}'", startDate);
+            }
+            if (!string.IsNullOrEmpty(endDate))
+            {
+                query += string.Format(" and OrderTime <= '{0}'", endDate);
+            }
+            var result = await MySQLDataHelp.GetData<OrderData>(query);
+            return result.Select(d => new OrderModel(d)).ToArray();
+        }
+
         public bool Create(OrderData aOrder)
         {
             string query =

@@ -24,5 +24,11 @@ namespace SampleApplication.Base
             }
             return output;
         }
+
+        public static DateTime GetDateTime(DateTime? dt)
+        {
+            if (!dt.HasValue) return Const.MinDateTime;
+            return dt.Value < Const.MinDateTime ? Const.MinDateTime : dt.Value;
+        }
     }
 }
