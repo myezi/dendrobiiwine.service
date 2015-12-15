@@ -25,7 +25,7 @@ namespace SampleApplication.Models
         private ProviderData _providerData = null;
 
         private ProviderData ProviderData => _providerData ??
-                                             (_providerData = ProviderBusiness.GetInstance().GetProviderDataByID(_data.ProviderID).Result);
+                                             (_providerData = ProviderBusiness.GetInstance().GetProviderByIDAsync(_data.ProviderID).Result.ToData());
 
         private ServiceData _serviceInfo = null;
         private ServiceData ServiceInfo
@@ -34,7 +34,7 @@ namespace SampleApplication.Models
             {
                 if (_serviceInfo == null)
                 {
-                    _serviceInfo = ServiceBusiness.GetInstance().GetServiceDataById(_data.ServiceID).Result;
+                    _serviceInfo = ServiceBusiness.GetInstance().GetServiceByIDAsync(_data.ServiceID).Result.ToData();
                 }
                 return _serviceInfo;
             }

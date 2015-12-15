@@ -39,13 +39,6 @@ namespace SampleApplication.Business
             return new ServiceModel(result.First());
         }
 
-        public async Task<ServiceData> GetServiceDataById(int id)
-        {
-            string query = string.Format("select * from service where ServiceID = {0}", id);
-            var result = await MySQLDataHelp.GetData<ServiceData>(query);
-            return result.First();
-        }
-
         public bool Create(ServiceData aServicer)
         {
             string query =

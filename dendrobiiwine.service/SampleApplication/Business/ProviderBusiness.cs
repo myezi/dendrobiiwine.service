@@ -27,7 +27,7 @@ namespace SampleApplication.Business
 
         public async Task<ProviderModel[]> GetProvidersByAreaAsync(string area)
         {
-            string query = "select * from provider";
+            string query = string.Format("select * from provider where city = '{0}'",area);
             var result = await MySQLDataHelp.GetData<ProviderData>(query);
             return result.Select(d => new ProviderModel(d)).ToArray();
         }
@@ -37,13 +37,6 @@ namespace SampleApplication.Business
             string query = string.Format("select  * from provider where ProviderID = {0}", id);
             var result = await MySQLDataHelp.GetData<ProviderData>(query);
             return new ProviderModel(result.First());
-        }
-
-        internal async Task<ProviderData> GetProviderDataByID(int id)
-        {
-            string query = string.Format("select  * from provider where ProviderID = {0}", id);
-            var result = await MySQLDataHelp.GetData<ProviderData>(query);
-            return result.First();
         }
 
         public bool Create(ProviderData aProvider)
@@ -63,6 +56,11 @@ namespace SampleApplication.Business
                     Address=@Address, Phone=@Phone, Login=@Login, Password=@Password, BigImage=@BigImage, SmallImage=@SmallImage, Score=@Score, 
                     `Status`=@Status where ProviderID=@ProviderID";
             return MySQLDataHelp.ExecuteSave(query, aProvider);
+        }
+
+        private void SyncUsedCity(string city)
+        {
+
         }
     }
 }

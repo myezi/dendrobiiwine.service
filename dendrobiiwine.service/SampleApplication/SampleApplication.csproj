@@ -96,8 +96,9 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Submail">
-      <HintPath>E:\Demo\DendrobiiWineWeb\SUBMAIL_C_SHARP_SDK-master\Submail\bin\Debug\Submail.dll</HintPath>
+    <Reference Include="Submail, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Submail.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting">
@@ -174,6 +175,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="default.html" />
+    <Content Include="Libs\Submail.dll" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="menu.json" />
@@ -208,6 +210,7 @@
     <Compile Include="Base\OAuthProvider.cs" />
     <Compile Include="Base\SendSMSBusiness.cs" />
     <Compile Include="Base\TypeFormat.cs" />
+    <Compile Include="Business\AreaBusiness.cs" />
     <Compile Include="Business\CommonBusiness.cs" />
     <Compile Include="Business\CustomerBusiness.cs" />
     <Compile Include="Business\GenerateCardBusiness.cs" />
@@ -217,6 +220,7 @@
     <Compile Include="Business\ServiceBusiness.cs" />
     <Compile Include="Business\UserBusiness.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AreaController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
@@ -244,7 +248,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CityModule.cs" />
     <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Models\DistrictModule.cs" />
+    <Compile Include="Models\ProvinceModule.cs" />
     <Compile Include="Models\ResultModel.cs" />
     <Compile Include="Object\LoginObject.cs" />
     <Compile Include="Models\OrderModel.cs" />
